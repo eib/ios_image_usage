@@ -93,11 +93,6 @@ class Images
     find_image_references { |reference, image_name| image_named(image_name).add_reference(reference) }
   
     @all_images.each do |bundle_name, image|
-      image.missing_iphone_versions?
-      image.missing_ipad_versions?
-      #next
-      #puts "Image: [#{bundle_name}] #{image.image_name}: #{image.references.join(', ')}"; next
-      
       if image.missing_image_files?
         puts "Missing image files: #{bundle_name} (references: #{image.references.join(', ')})"
       elsif image.missing_references?
@@ -122,8 +117,6 @@ class Images
     end
   end
   
-  # Searches
-
   def find_image_files(&blk)
     list_files_with_extension(".png").each do |file|
       blk.call(file)
